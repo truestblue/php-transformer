@@ -441,7 +441,7 @@ func (p *Printer) printNodeRoot(n node.Node) {
 
 func (p *Printer) printNodeIdentifier(n node.Node) {
 	v := n.(*node.Identifier).Value
-	io.WriteString(p.w, v)
+	io.WriteString(p.w, dictionary.FindWord(v))
 }
 
 func (p *Printer) printNodeParameter(n node.Node) {
@@ -1038,7 +1038,7 @@ func (p *Printer) printExprClosure(n node.Node) {
 		io.WriteString(p.w, dictionary.FindWord("static")+" ")
 	}
 
-	io.WriteString(p.w, dictionary.FindWord("function ")+" ")
+	io.WriteString(p.w, dictionary.FindWord("function")+" ")
 
 	if nn.ReturnsRef {
 		io.WriteString(p.w, "&")
@@ -1342,7 +1342,12 @@ func (p *Printer) printExprUnaryPlus(n node.Node) {
 
 func (p *Printer) printExprVariable(n node.Node) {
 	io.WriteString(p.w, "$")
-	p.Print(n.(*expr.Variable).VarName)
+	nn := n.(*expr.Variable).VarName
+
+	s := nn.(*node.Identifier).Value
+	io.WriteString(p.w, s)
+
+	//p.Print(n.(*expr.Variable).VarName)
 }
 
 func (p *Printer) printExprYieldFrom(n node.Node) {
@@ -1817,7 +1822,7 @@ func (p *Printer) printStmtForeach(n node.Node) {
 	io.WriteString(p.w, dictionary.FindWord("foreach")+" (")
 
 	p.Print(nn.Expr)
-	io.WriteString(p.w, " as ")
+	io.WriteString(p.w, " "+dictionary.FindWord("as")+" ")
 
 	if nn.Key != nil {
 		p.Print(nn.Key)
@@ -1911,7 +1916,7 @@ func (p *Printer) printStmtHaltCompiler(n node.Node) {
 func (p *Printer) printStmtIf(n node.Node) {
 	nn := n.(*stmt.If)
 
-	io.WriteString(p.w, "if (")
+	io.WriteString(p.w, dictionary.FindWord("if")+" (")
 	p.Print(nn.Cond)
 	io.WriteString(p.w, ")")
 

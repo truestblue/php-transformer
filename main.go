@@ -27,14 +27,14 @@ const (
 
 var wg sync.WaitGroup
 var usePhp5 *bool
-var noDump *bool
+var dump *bool
 
 var base = ""
 var outFilePath = ""
 
 func main() {
 	usePhp5 = flag.Bool("php5", false, "use PHP5 parserWorker")
-	noDump = flag.Bool("noDump", false, "disable dumping to stdout")
+	dump = flag.Bool("dump", false, "disable dumping to stdout")
 	flag.Parse()
 
 	pathCh := make(chan string)
@@ -120,18 +120,18 @@ func printer(result <-chan parser.Parser) {
 			fmt.Println(e)
 		}
 
-		if !*noDump {
-			nsResolver := visitor.NewNamespaceResolver()
-			parserWorker.GetRootNode().Walk(nsResolver)
+		if *dump {
+		nsResolver := visitor.NewNamespaceResolver()
+		parserWorker.GetRootNode().Walk(nsResolver)
 
-			dumper := visitor.Dumper{
-				Writer:     os.Stdout,
-				Indent:     "  | ",
-				Comments:   parserWorker.GetComments(),
-				Positions:  parserWorker.GetPositions(),
-				NsResolver: nsResolver,
-			}
-			parserWorker.GetRootNode().Walk(dumper)
+		dumper := visitor.Dumper{
+			Writer:     os.Stdout,
+			Indent:     "  | ",
+			Comments:   parserWorker.GetComments(),
+			Positions:  parserWorker.GetPositions(),
+			NsResolver: nsResolver,
+		}
+		parserWorker.GetRootNode().Walk(dumper)
 		}
 
 		fileOut := printOut(parserWorker.GetPath(), SCR)

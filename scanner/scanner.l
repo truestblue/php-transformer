@@ -114,7 +114,7 @@ NEW_LINE        (\r|\n|\r\n)
 <INITIAL>\<\?=                                  l.begin(PHP);lval.Token(l.createToken(l.Token())); return T_ECHO;
 
 <PHP>[ \t\n\r]+
-<PHP>[;][ \t\n\r]*\?\>{NEW_LINE}?               l.begin(INITIAL);lval.Token(l.createToken(l.Token())); return Rune2Class(';');
+<PHP>[;][ \t\n\r]*\?\>                          l.begin(INITIAL);lval.Token(l.createToken(l.Token())); return Rune2Class(';');
 <PHP>\?\>                                       l.begin(INITIAL);lval.Token(l.createToken(l.Token())); return Rune2Class(';');
 
 
@@ -505,7 +505,6 @@ NEW_LINE        (\r|\n|\r\n)
     }
 
 <STRING>\"                                  l.popState(); lval.Token(l.createToken(l.Token())); return Rune2Class(l.Token()[0].Rune)
-<STRING>\{\${VAR_NAME}\}                    lval.Token(l.createToken(l.Token())); return T_VARIABLE
 <STRING,HEREDOC,BACKQUOTE>\{\$              lval.Token(l.createToken(l.ungetChars(1))); l.pushState(PHP); return T_CURLY_OPEN
 <STRING,HEREDOC,BACKQUOTE>\$\{              l.pushState(STRING_VAR_NAME); lval.Token(l.createToken(l.Token())); return T_DOLLAR_OPEN_CURLY_BRACES
 <STRING,HEREDOC,BACKQUOTE>\${VAR_NAME}      l.ungetChars(len(l.Token()));l.pushState(STRING_VAR)
