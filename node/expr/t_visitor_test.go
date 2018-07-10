@@ -1,9 +1,14 @@
+<<<<<<< HEAD
 package expr
+=======
+package expr_test
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
 
 import (
 	"reflect"
 	"testing"
 
+<<<<<<< HEAD
 	"github.com/z7zmey/php-transformer/node/stmt"
 
 	"github.com/z7zmey/php-transformer/node/name"
@@ -15,6 +20,19 @@ import (
 	"github.com/z7zmey/php-transformer/node"
 	"github.com/z7zmey/php-transformer/node/expr"
 	"github.com/z7zmey/php-transformer/walker"
+=======
+	"github.com/z7zmey/php-parser/node/stmt"
+
+	"github.com/z7zmey/php-parser/node/name"
+
+	"github.com/z7zmey/php-parser/node/scalar"
+
+	"github.com/kylelemons/godebug/pretty"
+
+	"github.com/z7zmey/php-parser/node"
+	"github.com/z7zmey/php-parser/node/expr"
+	"github.com/z7zmey/php-parser/walker"
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
 )
 
 var nodesToTest = []struct {

@@ -1,9 +1,14 @@
+<<<<<<< HEAD
 package scalar
+=======
+package scalar_test
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
 
 import (
 	"bytes"
 	"testing"
 
+<<<<<<< HEAD
 	"github.com/truestblue/php-transformer/node/expr"
 
 	"github.com/truestblue/php-transformer/node"
@@ -11,6 +16,15 @@ import (
 	"github.com/truestblue/php-transformer/node/stmt"
 	"github.com/truestblue/php-transformer/php5"
 	"github.com/truestblue/php-transformer/php7"
+=======
+	"github.com/z7zmey/php-parser/node/expr"
+
+	"github.com/z7zmey/php-parser/node"
+	"github.com/z7zmey/php-parser/node/scalar"
+	"github.com/z7zmey/php-parser/node/stmt"
+	"github.com/z7zmey/php-parser/php5"
+	"github.com/z7zmey/php-parser/php7"
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
 )
 
 func TestSimpleVar(t *testing.T) {

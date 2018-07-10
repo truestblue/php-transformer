@@ -1,4 +1,4 @@
-package php5
+package php5_test
 
 import (
 	"bytes"
@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"github.com/kylelemons/godebug/pretty"
+
 	"github.com/truestblue/php-transformer/node/expr"
 	"github.com/truestblue/php-transformer/node/expr/assign"
 	"github.com/truestblue/php-transformer/node/expr/binary"

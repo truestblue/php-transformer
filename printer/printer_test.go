@@ -1,4 +1,4 @@
-package printer
+package printer_test
 
 import (
 	"bytes"
@@ -13,6 +13,7 @@ import (
 	"github.com/truestblue/php-transformer/node/scalar"
 	"github.com/truestblue/php-transformer/node/stmt"
 	"github.com/truestblue/php-transformer/printer"
+
 )
 
 func TestPrintFile(t *testing.T) {
@@ -346,7 +347,11 @@ func TestPrintScalarEncapsed(t *testing.T) {
 		},
 	})
 
+<<<<<<< HEAD
 	if o.String() != `"hello $var world"` {
+=======
+	if o.String() != `"hello {$var} world"` {
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
 		t.Errorf("TestPrintScalarEncapsed is failed\n")
 	}
 }
@@ -365,7 +370,11 @@ func TestPrintScalarHeredoc(t *testing.T) {
 	})
 
 	expected := `<<<LBL
+<<<<<<< HEAD
 hello $var world
+=======
+hello {$var} world
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
 LBL`
 	actual := o.String()
 
@@ -1844,7 +1853,11 @@ func TestPrintShellExec(t *testing.T) {
 		},
 	})
 
+<<<<<<< HEAD
 	expected := "`hello $world!`"
+=======
+	expected := "`hello {$world}!`"
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
 	actual := o.String()
 
 	if expected != actual {

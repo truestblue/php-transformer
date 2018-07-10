@@ -1,9 +1,15 @@
 package parser
 
 import (
+<<<<<<< HEAD
 	"github.com/truestblue/php-transformer/comment"
 	"github.com/truestblue/php-transformer/node"
 	"github.com/truestblue/php-transformer/scanner"
+=======
+	"github.com/z7zmey/php-parser/comment"
+	"github.com/z7zmey/php-parser/node"
+	"github.com/z7zmey/php-parser/scanner"
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
 )
 
 // Comments a collection of comment groups assigned to nodes

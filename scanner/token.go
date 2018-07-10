@@ -12,7 +12,6 @@ type Token struct {
 	Comments []*comment.Comment
 }
 
-//func (t *Token) String() string {
-//	fmt.Println(t.Value)
-//	return string(t.Value)
-//}
+func (t *Token) String() string {
+	return string(t.Value)
+}

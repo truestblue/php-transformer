@@ -3,9 +3,15 @@ package parser
 import (
 	"sync"
 
+<<<<<<< HEAD
 	"github.com/truestblue/php-transformer/node"
 	"github.com/truestblue/php-transformer/position"
 	"github.com/truestblue/php-transformer/scanner"
+=======
+	"github.com/z7zmey/php-parser/node"
+	"github.com/z7zmey/php-parser/position"
+	"github.com/z7zmey/php-parser/scanner"
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
 )
 
 // PositionBuilder provide functions to constuct positions

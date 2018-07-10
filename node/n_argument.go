@@ -2,6 +2,7 @@ package node
 
 import "github.com/truestblue/php-transformer/walker"
 
+
 // Argument node
 type Argument struct {
 	Variadic    bool // if ... before variable

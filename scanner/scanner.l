@@ -117,6 +117,7 @@ NEW_LINE        (\r|\n|\r\n)
 <PHP>[;][ \t\n\r]*\?\>{NEW_LINE}?               l.begin(INITIAL);lval.Token(l.createToken(l.Token())); return Rune2Class(';');
 <PHP>\?\>                                       l.begin(INITIAL);lval.Token(l.createToken(l.Token())); return Rune2Class(';');
 
+
 <PHP>{DNUM}|{EXPONENT_DNUM}                     lval.Token(l.createToken(l.Token())); return T_DNUMBER
 <PHP>{BNUM}
     tb := l.Token()
@@ -289,7 +290,11 @@ NEW_LINE        (\r|\n|\r\n)
                 if c == '\n' {
                     continue
                 }
+<<<<<<< HEAD
 
+=======
+                
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
             case '\n':
 
             case '?':
@@ -340,6 +345,10 @@ NEW_LINE        (\r|\n|\r\n)
     }
 
 <PHP>{OPERATORS}                                lval.Token(l.createToken(l.Token())); return Rune2Class(rune(l.TokenBytes(nil)[0]))
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
 <PHP>\{                                         l.pushState(PHP); lval.Token(l.createToken(l.Token())); return Rune2Class(rune(l.TokenBytes(nil)[0]))
 <PHP>\}                                         l.popState();     lval.Token(l.createToken(l.Token())); return Rune2Class(rune(l.TokenBytes(nil)[0])); l.PhpDocComment = ""
 <PHP>\${VAR_NAME}                               lval.Token(l.createToken(l.Token())); return T_VARIABLE
@@ -362,7 +371,11 @@ NEW_LINE        (\r|\n|\r\n)
     if tb[0].Rune == 'b' {
         binPrefix = 1
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
     lblFirst := 3 + binPrefix
     lblLast := len(tb)-2
     if tb[lblLast].Rune == '\r' {
@@ -382,11 +395,19 @@ NEW_LINE        (\r|\n|\r\n)
     copy(heredocToken, tb[lblFirst:lblLast+1])
 
     switch tb[lblFirst].Rune {
+<<<<<<< HEAD
         case '\'' :
             lblFirst++
             lblLast--
             l.begin(NOWDOC)
         case '"' :
+=======
+        case '\'' : 
+            lblFirst++
+            lblLast--
+            l.begin(NOWDOC)
+        case '"' : 
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
             lblFirst++
             lblLast--
             l.begin(HEREDOC)
@@ -395,7 +416,11 @@ NEW_LINE        (\r|\n|\r\n)
     }
 
     l.heredocLabel = l.tokenString(tb[lblFirst:lblLast+1])
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
     ungetCnt := len(l.heredocLabel)
     searchLabelAhead := []byte{}
     for i := 0; i < len(l.heredocLabel); i++ {
@@ -422,7 +447,11 @@ NEW_LINE        (\r|\n|\r\n)
 <NOWDOC>.|[ \t\n\r]
     searchLabel := []byte{}
     tb := []lex.Char{}
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
     for {
         if c == -1 {
             break;
@@ -440,7 +469,11 @@ NEW_LINE        (\r|\n|\r\n)
                 tb = l.ungetChars(len(l.heredocLabel))
                 break;
             }
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
             searchLabel = []byte{}
         } else {
             searchLabel = append(searchLabel, byte(rune(c)))
@@ -460,7 +493,11 @@ NEW_LINE        (\r|\n|\r\n)
 
     beginString := func() int {
         cnt := 1; if (binPrefix) {cnt = 2}
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
         l.ungetChars(len(l.Token())-cnt)
         chars := l.Token()[:cnt]
         l.pushState(STRING)
@@ -474,25 +511,43 @@ NEW_LINE        (\r|\n|\r\n)
         }
 
         switch c {
+<<<<<<< HEAD
             case '"' :
                 c = l.Next();
                 lval.Token(l.createToken(l.Token())); return T_CONSTANT_ENCAPSED_STRING
                 break F;
 
+=======
+            case '"' : 
+                c = l.Next();
+                lval.Token(l.createToken(l.Token())); return T_CONSTANT_ENCAPSED_STRING
+                break F;
+            
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
             case '$':
                 c = l.Next();
                 if rune(c) == '{' || c >= 'A' && c <= 'Z' || c == '_' || c >= 'a' && c <= 'z' || c >= '\u007f' && c <= 'ÿ' {
                     return beginString()
                     break F;
+<<<<<<< HEAD
                 }
                 l.ungetChars(0)
 
+=======
+                } 
+                l.ungetChars(0)
+            
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
             case '{':
                 c = l.Next();
                 if rune(c) == '$' {
                     return beginString()
                     break F;
+<<<<<<< HEAD
                 }
+=======
+                } 
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
                 l.ungetChars(0)
 
             case '\\':
@@ -503,7 +558,10 @@ NEW_LINE        (\r|\n|\r\n)
     }
 
 <STRING>\"                                  l.popState(); lval.Token(l.createToken(l.Token())); return Rune2Class(l.Token()[0].Rune)
+<<<<<<< HEAD
 <STRING>\{\${VAR_NAME}\}                    lval.Token(l.createToken(l.Token())); return T_VARIABLE
+=======
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
 <STRING,HEREDOC,BACKQUOTE>\{\$              lval.Token(l.createToken(l.ungetChars(1))); l.pushState(PHP); return T_CURLY_OPEN
 <STRING,HEREDOC,BACKQUOTE>\$\{              l.pushState(STRING_VAR_NAME); lval.Token(l.createToken(l.Token())); return T_DOLLAR_OPEN_CURLY_BRACES
 <STRING,HEREDOC,BACKQUOTE>\${VAR_NAME}      l.ungetChars(len(l.Token()));l.pushState(STRING_VAR)
@@ -522,7 +580,11 @@ NEW_LINE        (\r|\n|\r\n)
             case '{':
                 if rune(c) == '$' {
                     l.ungetChars(1)
+<<<<<<< HEAD
                     lval.Token(l.createToken(tb[:len(tb)-1]));
+=======
+                    lval.Token(l.createToken(tb[:len(tb)-1])); 
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
                     return T_ENCAPSED_AND_WHITESPACE
                 }
 
@@ -562,7 +624,11 @@ NEW_LINE        (\r|\n|\r\n)
             case '{':
                 if rune(c) == '$' {
                     l.ungetChars(1)
+<<<<<<< HEAD
                     lval.Token(l.createToken(tb[:len(tb)-1]));
+=======
+                    lval.Token(l.createToken(tb[:len(tb)-1])); 
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
                     return T_ENCAPSED_AND_WHITESPACE
                 }
 
@@ -589,7 +655,11 @@ NEW_LINE        (\r|\n|\r\n)
 <HEREDOC>.|[ \t\n\r]
     searchLabel := []byte{}
     tb := []lex.Char{}
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
     for {
         if c == -1 {
             break;
@@ -610,6 +680,7 @@ NEW_LINE        (\r|\n|\r\n)
                 fallthrough
 
             case '\n':
+<<<<<<< HEAD
                 if l.heredocLabel + ";" == string(searchLabel) {
                     l.begin(HEREDOC_END)
                     tb = l.ungetChars(len(l.heredocLabel)+1+nls)
@@ -626,22 +697,54 @@ NEW_LINE        (\r|\n|\r\n)
 
                 searchLabel = []byte{}
 
+=======
+                if l.heredocLabel + ";" == string(searchLabel) { 
+                    l.begin(HEREDOC_END)
+                    tb = l.ungetChars(len(l.heredocLabel)+1+nls)
+                    lval.Token(l.createToken(tb)); 
+                    return T_ENCAPSED_AND_WHITESPACE
+                }
+
+                if l.heredocLabel == string(searchLabel) { 
+                    l.begin(HEREDOC_END)
+                    tb = l.ungetChars(len(l.heredocLabel)+nls)
+                    lval.Token(l.createToken(tb)); 
+                    return T_ENCAPSED_AND_WHITESPACE
+                }
+                
+                searchLabel = []byte{}
+            
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
             case '$':
                 c = l.Next();
                 if rune(c) == '{' || isValidFirstVarNameRune(rune(c)) {
                     tb = l.ungetChars(1)
+<<<<<<< HEAD
                     lval.Token(l.createToken(tb));
                     return T_ENCAPSED_AND_WHITESPACE
                 }
                 l.ungetChars(0)
 
+=======
+                    lval.Token(l.createToken(tb)); 
+                    return T_ENCAPSED_AND_WHITESPACE
+                } 
+                l.ungetChars(0)
+            
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
             case '{':
                 c = l.Next();
                 if rune(c) == '$' {
                     tb = l.ungetChars(1)
+<<<<<<< HEAD
                     lval.Token(l.createToken(tb));
                     return T_ENCAPSED_AND_WHITESPACE
                 }
+=======
+                    lval.Token(l.createToken(tb)); 
+                    return T_ENCAPSED_AND_WHITESPACE
+                } 
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
                 l.ungetChars(0)
 
             case '\\':
@@ -649,7 +752,11 @@ NEW_LINE        (\r|\n|\r\n)
                 if c == '\n' || c == '\r' {
                     l.ungetChars(0)
                 }
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
             default:
                 searchLabel = append(searchLabel, byte(rune(c)))
         }
@@ -677,4 +784,8 @@ NEW_LINE        (\r|\n|\r\n)
 %%
     if c, ok := l.Abort(); ok { return int(c) }
     goto yyAction
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab

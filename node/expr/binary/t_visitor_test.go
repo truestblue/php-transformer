@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 package binary
+=======
+package binary_test
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
 
 import (
 	"reflect"
@@ -6,10 +10,17 @@ import (
 
 	"github.com/kylelemons/godebug/pretty"
 
+<<<<<<< HEAD
 	"github.com/truestblue/php-transformer/node"
 	"github.com/truestblue/php-transformer/node/expr"
 	"github.com/truestblue/php-transformer/node/expr/binary"
 	"github.com/truestblue/php-transformer/walker"
+=======
+	"github.com/z7zmey/php-parser/node"
+	"github.com/z7zmey/php-parser/node/expr"
+	"github.com/z7zmey/php-parser/node/expr/binary"
+	"github.com/z7zmey/php-parser/walker"
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
 )
 
 var nodesToTest = []struct {

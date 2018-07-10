@@ -1,5 +1,6 @@
 // Package visitor contains walker.visitor implementations
-package visitor
+
+package visitor_test
 
 import (
 	"reflect"
@@ -15,7 +16,7 @@ import (
 
 	"github.com/truestblue/php-transformer/node"
 	"github.com/truestblue/php-transformer/node/name"
-)
+	)
 
 func assertEqual(t *testing.T, expected interface{}, actual interface{}) {
 	if !reflect.DeepEqual(expected, actual) {

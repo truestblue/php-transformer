@@ -9,7 +9,6 @@ import (
 	"github.com/truestblue/php-transformer/comment"
 	"github.com/truestblue/php-transformer/node"
 	"github.com/truestblue/php-transformer/parser"
-
 	"github.com/truestblue/php-transformer/walker"
 )
 

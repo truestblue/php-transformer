@@ -2,3 +2,11 @@
 /.idea/*
 .idea/
 *.gob
+.vscode
+php-transformer
+*example.php
+
+cpu.prof
+mem.prof
+php7.test
+php5.test

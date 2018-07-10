@@ -1,4 +1,5 @@
-package scanner
+
+package scanner_test
 
 import (
 	"reflect"

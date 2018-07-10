@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package stmt
 
 import (
@@ -10,6 +11,20 @@ import (
 	"github.com/truestblue/php-transformer/node/stmt"
 	"github.com/truestblue/php-transformer/php5"
 	"github.com/truestblue/php-transformer/php7"
+=======
+package stmt_test
+
+import (
+	"bytes"
+	"github.com/z7zmey/php-parser/node/expr"
+	"github.com/z7zmey/php-parser/node/name"
+	"testing"
+
+	"github.com/z7zmey/php-parser/node"
+	"github.com/z7zmey/php-parser/node/stmt"
+	"github.com/z7zmey/php-parser/php5"
+	"github.com/z7zmey/php-parser/php7"
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
 )
 
 func TestTry(t *testing.T) {

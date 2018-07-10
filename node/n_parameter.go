@@ -1,6 +1,10 @@
 package node
 
+<<<<<<< HEAD
 import "github.com/truestblue/php-transformer/walker"
+=======
+import "github.com/z7zmey/php-parser/walker"
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
 
 // Parameter node
 type Parameter struct {

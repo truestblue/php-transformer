@@ -17,6 +17,7 @@ CLI dumper:
 
 	$GOPATH/bin/php-transformer -php5 /path/to/file/or/dir
 
+
 Package usage example:
 
 	package main
@@ -28,6 +29,7 @@ Package usage example:
 
 		"github.com/truestblue/php-transformer/php7"
 		"github.com/truestblue/php-transformer/visitor"
+
 	)
 
 	func main() {
@@ -52,3 +54,4 @@ Package usage example:
 	}
 */
 package main // import "github.com/truestblue/php-transformer"
+

@@ -1,14 +1,26 @@
+<<<<<<< HEAD
 package name
+=======
+package name_test
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
 
 import (
 	"reflect"
 	"testing"
 
+<<<<<<< HEAD
 	"github.com/truestblue/php-transformer/node/name"
 	"github.com/truestblue/php-transformer/walker"
 
 	"github.com/kylelemons/godebug/pretty"
 	"github.com/truestblue/php-transformer/node"
+=======
+	"github.com/z7zmey/php-parser/node/name"
+	"github.com/z7zmey/php-parser/walker"
+
+	"github.com/kylelemons/godebug/pretty"
+	"github.com/z7zmey/php-parser/node"
+>>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
 )
 
 var nameNodesTests = []struct {
