@@ -1,4 +1,4 @@
-package name
+package name_test
 
 import (
 	"reflect"

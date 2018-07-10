@@ -1,14 +1,14 @@
-package stmt
+package stmt_test
 
 import (
 	"bytes"
 	"testing"
 
-	"github.com/z7zmey/php-transformer/node"
-	"github.com/z7zmey/php-transformer/node/expr"
-	"github.com/z7zmey/php-transformer/node/stmt"
-	"github.com/z7zmey/php-transformer/php5"
-	"github.com/z7zmey/php-transformer/php7"
+	"github.com/truestblue/php-transformer/node"
+	"github.com/truestblue/php-transformer/node/expr"
+	"github.com/truestblue/php-transformer/node/stmt"
+	"github.com/truestblue/php-transformer/php5"
+	"github.com/truestblue/php-transformer/php7"
 )
 
 func TestThrow(t *testing.T) {

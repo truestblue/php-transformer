@@ -1,4 +1,4 @@
-package cast
+package cast_test
 
 import (
 	"reflect"

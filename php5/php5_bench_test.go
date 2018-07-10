@@ -1,10 +1,10 @@
-package php5
+package php5_test
 
 import (
 	"bytes"
 	"testing"
 
-	"github.com/truestblue/php-transformer/php5"
+	"github.com/z7zmey/php-parser/php5"
 )
 
 func BenchmarkPhp5(b *testing.B) {

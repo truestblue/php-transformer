@@ -1,5 +1,5 @@
-// Package visitor contains walker.visitor implementations
-package visitor
+// Package visitor contains walker.visitor implementation
+package visitor_test
 
 import (
 	"bytes"

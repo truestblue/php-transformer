@@ -1,4 +1,4 @@
-package node
+package node_test
 
 import (
 	"reflect"

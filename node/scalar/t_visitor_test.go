@@ -1,4 +1,4 @@
-package scalar
+package scalar_test
 
 import (
 	"reflect"

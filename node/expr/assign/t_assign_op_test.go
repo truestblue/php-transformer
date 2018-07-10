@@ -1,4 +1,4 @@
-package assign
+package assign_test
 
 import (
 	"bytes"

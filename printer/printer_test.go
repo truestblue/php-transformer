@@ -1,4 +1,4 @@
-package printer
+package printer_test
 
 import (
 	"bytes"
@@ -346,7 +346,7 @@ func TestPrintScalarEncapsed(t *testing.T) {
 		},
 	})
 
-	if o.String() != `"hello $var world"` {
+	if o.String() != `"hello {$var} world"` {
 		t.Errorf("TestPrintScalarEncapsed is failed\n")
 	}
 }
@@ -365,7 +365,8 @@ func TestPrintScalarHeredoc(t *testing.T) {
 	})
 
 	expected := `<<<LBL
-hello $var world
+
+hello {$var} world
 LBL`
 	actual := o.String()
 
@@ -1845,6 +1846,7 @@ func TestPrintShellExec(t *testing.T) {
 	})
 
 	expected := "`hello $world!`"
+
 	actual := o.String()
 
 	if expected != actual {

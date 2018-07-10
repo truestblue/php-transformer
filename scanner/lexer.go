@@ -5,6 +5,7 @@ import (
 	"bufio"
 	"bytes"
 	"github.com/truestblue/php-transformer/position"
+
 	"go/token"
 	"io"
 	"sync"
@@ -429,9 +430,6 @@ const T_IS_SMALLER_OR_EQUAL = 57480
 
 // T_IS_GREATER_OR_EQUAL token
 const T_IS_GREATER_OR_EQUAL = 57481
-
-// T_ENDPHP token
-const T_END_PHP = 57482
 
 // Lval parsers yySymType must implement this interface
 type Lval interface {

@@ -1,4 +1,4 @@
-package comment
+package comment_test
 
 import (
 	"testing"

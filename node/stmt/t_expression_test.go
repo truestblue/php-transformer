@@ -1,4 +1,4 @@
-package stmt
+package stmt_test
 
 import (
 	"bytes"

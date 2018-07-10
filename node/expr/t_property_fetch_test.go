@@ -1,4 +1,4 @@
-package expr
+package expr_test
 
 import (
 	"bytes"

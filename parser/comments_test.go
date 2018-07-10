@@ -1,11 +1,10 @@
-package parser
+package parser_test
 
 import (
-	"testing"
-
 	"github.com/truestblue/php-transformer/comment"
 	"github.com/truestblue/php-transformer/node"
 	"github.com/truestblue/php-transformer/parser"
+	"testing"
 )
 
 func TestComments(t *testing.T) {

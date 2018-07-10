@@ -1,4 +1,4 @@
-package php7
+package php7_test
 
 import (
 	"bytes"

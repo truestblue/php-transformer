@@ -1,4 +1,4 @@
-package position
+package position_test
 
 import (
 	"testing"

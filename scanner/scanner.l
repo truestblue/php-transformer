@@ -114,8 +114,9 @@ NEW_LINE        (\r|\n|\r\n)
 <INITIAL>\<\?=                                  l.begin(PHP);lval.Token(l.createToken(l.Token())); return T_ECHO;
 
 <PHP>[ \t\n\r]+
-<PHP>[;][ \t\n\r]*\?\>{NEW_LINE}?               l.begin(INITIAL);lval.Token(l.createToken(l.Token())); return Rune2Class(';');
+<PHP>[;][ \t\n\r]*\?\>                          l.begin(INITIAL);lval.Token(l.createToken(l.Token())); return Rune2Class(';');
 <PHP>\?\>                                       l.begin(INITIAL);lval.Token(l.createToken(l.Token())); return Rune2Class(';');
+
 
 <PHP>{DNUM}|{EXPONENT_DNUM}                     lval.Token(l.createToken(l.Token())); return T_DNUMBER
 <PHP>{BNUM}
@@ -340,6 +341,7 @@ NEW_LINE        (\r|\n|\r\n)
     }
 
 <PHP>{OPERATORS}                                lval.Token(l.createToken(l.Token())); return Rune2Class(rune(l.TokenBytes(nil)[0]))
+
 <PHP>\{                                         l.pushState(PHP); lval.Token(l.createToken(l.Token())); return Rune2Class(rune(l.TokenBytes(nil)[0]))
 <PHP>\}                                         l.popState();     lval.Token(l.createToken(l.Token())); return Rune2Class(rune(l.TokenBytes(nil)[0])); l.PhpDocComment = ""
 <PHP>\${VAR_NAME}                               lval.Token(l.createToken(l.Token())); return T_VARIABLE
@@ -492,7 +494,7 @@ NEW_LINE        (\r|\n|\r\n)
                 if rune(c) == '$' {
                     return beginString()
                     break F;
-                }
+                } 
                 l.ungetChars(0)
 
             case '\\':
@@ -503,7 +505,6 @@ NEW_LINE        (\r|\n|\r\n)
     }
 
 <STRING>\"                                  l.popState(); lval.Token(l.createToken(l.Token())); return Rune2Class(l.Token()[0].Rune)
-<STRING>\{\${VAR_NAME}\}                    lval.Token(l.createToken(l.Token())); return T_VARIABLE
 <STRING,HEREDOC,BACKQUOTE>\{\$              lval.Token(l.createToken(l.ungetChars(1))); l.pushState(PHP); return T_CURLY_OPEN
 <STRING,HEREDOC,BACKQUOTE>\$\{              l.pushState(STRING_VAR_NAME); lval.Token(l.createToken(l.Token())); return T_DOLLAR_OPEN_CURLY_BRACES
 <STRING,HEREDOC,BACKQUOTE>\${VAR_NAME}      l.ungetChars(len(l.Token()));l.pushState(STRING_VAR)
@@ -625,7 +626,7 @@ NEW_LINE        (\r|\n|\r\n)
                 }
 
                 searchLabel = []byte{}
-
+            
             case '$':
                 c = l.Next();
                 if rune(c) == '{' || isValidFirstVarNameRune(rune(c)) {
@@ -649,7 +650,6 @@ NEW_LINE        (\r|\n|\r\n)
                 if c == '\n' || c == '\r' {
                     l.ungetChars(0)
                 }
-
             default:
                 searchLabel = append(searchLabel, byte(rune(c)))
         }
@@ -678,3 +678,4 @@ NEW_LINE        (\r|\n|\r\n)
     if c, ok := l.Abort(); ok { return int(c) }
     goto yyAction
 }
+

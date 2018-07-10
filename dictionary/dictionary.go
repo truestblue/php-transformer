@@ -1,12 +1,11 @@
 package dictionary
 
 import (
-	"strings"
-	"os"
-	"fmt"
 	"encoding/gob"
+	"fmt"
+	"os"
+	"strings"
 )
-
 
 var lookup = make(map[string]string)
 
