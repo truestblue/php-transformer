@@ -1,14 +1,9 @@
-<<<<<<< HEAD
-package node
-=======
 package node_test
->>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
 
 import (
 	"reflect"
 	"testing"
 
-<<<<<<< HEAD
 	"github.com/truestblue/php-transformer/node/stmt"
 
 	"github.com/truestblue/php-transformer/node/scalar"
@@ -18,17 +13,6 @@ import (
 
 	"github.com/kylelemons/godebug/pretty"
 	"github.com/truestblue/php-transformer/node"
-=======
-	"github.com/z7zmey/php-parser/node/stmt"
-
-	"github.com/z7zmey/php-parser/node/scalar"
-	"github.com/z7zmey/php-parser/walker"
-
-	"github.com/z7zmey/php-parser/node/expr"
-
-	"github.com/kylelemons/godebug/pretty"
-	"github.com/z7zmey/php-parser/node"
->>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
 )
 
 var nodesToTest = []struct {

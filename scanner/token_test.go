@@ -1,4 +1,3 @@
-
 package scanner_test
 
 import (

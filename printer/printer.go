@@ -1,10 +1,11 @@
 package printer
 
 import (
+	"github.com/truestblue/php-transformer/node/stmt"
 	"io"
 	"strings"
-	"github.com/truestblue/php-transformer/node/stmt"
 
+	"github.com/truestblue/php-transformer/dictionary"
 	"github.com/truestblue/php-transformer/node"
 	"github.com/truestblue/php-transformer/node/expr"
 	"github.com/truestblue/php-transformer/node/expr/assign"
@@ -12,8 +13,6 @@ import (
 	"github.com/truestblue/php-transformer/node/expr/cast"
 	"github.com/truestblue/php-transformer/node/name"
 	"github.com/truestblue/php-transformer/node/scalar"
-	"github.com/truestblue/php-transformer/dictionary"
-
 )
 
 type Printer struct {
@@ -590,10 +589,6 @@ func (p *Printer) printScalarHeredoc(n node.Node) {
 	io.WriteString(p.w, strings.Trim(nn.Label, "\"'"))
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
 func (p *Printer) printScalarMagicConstant(n node.Node) {
 	v := n.(*scalar.MagicConstant).Value
 	io.WriteString(p.w, v)
@@ -801,7 +796,7 @@ func (p *Printer) printBinaryLogicalAnd(n node.Node) {
 	nn := n.(*binary.LogicalAnd)
 
 	p.Print(nn.Left)
-	io.WriteString(p.w, " " + dictionary.FindWord("and") + " ")
+	io.WriteString(p.w, " "+dictionary.FindWord("and")+" ")
 	p.Print(nn.Right)
 }
 
@@ -817,7 +812,7 @@ func (p *Printer) printBinaryLogicalXor(n node.Node) {
 	nn := n.(*binary.LogicalXor)
 
 	p.Print(nn.Left)
-	io.WriteString(p.w, " " + dictionary.FindWord("xor") + " ")
+	io.WriteString(p.w, " "+dictionary.FindWord("xor")+" ")
 
 	p.Print(nn.Right)
 }
@@ -993,7 +988,7 @@ func (p *Printer) printExprArrayItem(n node.Node) {
 func (p *Printer) printExprArray(n node.Node) {
 	nn := n.(*expr.Array)
 
-	io.WriteString(p.w, dictionary.FindWord("array") + "(")
+	io.WriteString(p.w, dictionary.FindWord("array")+"(")
 
 	p.joinPrint(", ", nn.Items)
 	io.WriteString(p.w, ")")
@@ -1022,7 +1017,7 @@ func (p *Printer) printExprClassConstFetch(n node.Node) {
 func (p *Printer) printExprClone(n node.Node) {
 	nn := n.(*expr.Clone)
 
-	io.WriteString(p.w, dictionary.FindWord("clone") + " ")
+	io.WriteString(p.w, dictionary.FindWord("clone")+" ")
 
 	p.Print(nn.Expr)
 }
@@ -1030,7 +1025,7 @@ func (p *Printer) printExprClone(n node.Node) {
 func (p *Printer) printExprClosureUse(n node.Node) {
 	nn := n.(*expr.ClosureUse)
 
-	io.WriteString(p.w, dictionary.FindWord("use") + " (")
+	io.WriteString(p.w, dictionary.FindWord("use")+" (")
 
 	p.joinPrint(", ", nn.Uses)
 	io.WriteString(p.w, ")")
@@ -1040,11 +1035,10 @@ func (p *Printer) printExprClosure(n node.Node) {
 	nn := n.(*expr.Closure)
 
 	if nn.Static {
-		io.WriteString(p.w, dictionary.FindWord("static") + " ")
+		io.WriteString(p.w, dictionary.FindWord("static")+" ")
 	}
 
-	io.WriteString(p.w, dictionary.FindWord("function ") + " ")
-
+	io.WriteString(p.w, dictionary.FindWord("function ")+" ")
 
 	if nn.ReturnsRef {
 		io.WriteString(p.w, "&")
@@ -1080,7 +1074,7 @@ func (p *Printer) printExprConstFetch(n node.Node) {
 func (p *Printer) printExprDie(n node.Node) {
 	nn := n.(*expr.Die)
 
-	io.WriteString(p.w, dictionary.FindWord("die") + "(")
+	io.WriteString(p.w, dictionary.FindWord("die")+"(")
 
 	p.Print(nn.Expr)
 	io.WriteString(p.w, ")")
@@ -1089,7 +1083,7 @@ func (p *Printer) printExprDie(n node.Node) {
 func (p *Printer) printExprEmpty(n node.Node) {
 	nn := n.(*expr.Empty)
 
-	io.WriteString(p.w, dictionary.FindWord("empty") + "(")
+	io.WriteString(p.w, dictionary.FindWord("empty")+"(")
 	p.Print(nn.Expr)
 	io.WriteString(p.w, ")")
 }
@@ -1104,7 +1098,7 @@ func (p *Printer) printExprErrorSuppress(n node.Node) {
 func (p *Printer) printExprEval(n node.Node) {
 	nn := n.(*expr.Eval)
 
-	io.WriteString(p.w, dictionary.FindWord("eval") + "(")
+	io.WriteString(p.w, dictionary.FindWord("eval")+"(")
 
 	p.Print(nn.Expr)
 	io.WriteString(p.w, ")")
@@ -1113,7 +1107,7 @@ func (p *Printer) printExprEval(n node.Node) {
 func (p *Printer) printExprExit(n node.Node) {
 	nn := n.(*expr.Exit)
 
-	io.WriteString(p.w, dictionary.FindWord("exit") + "exit(")
+	io.WriteString(p.w, dictionary.FindWord("exit")+"exit(")
 
 	p.Print(nn.Expr)
 	io.WriteString(p.w, ")")
@@ -1131,14 +1125,14 @@ func (p *Printer) printExprFunctionCall(n node.Node) {
 func (p *Printer) printExprInclude(n node.Node) {
 	nn := n.(*expr.Include)
 
-	io.WriteString(p.w, dictionary.FindWord("include") + " ")
+	io.WriteString(p.w, dictionary.FindWord("include")+" ")
 	p.Print(nn.Expr)
 }
 
 func (p *Printer) printExprIncludeOnce(n node.Node) {
 	nn := n.(*expr.IncludeOnce)
 
-	io.WriteString(p.w, dictionary.FindWord("include_once") + " ")
+	io.WriteString(p.w, dictionary.FindWord("include_once")+" ")
 
 	p.Print(nn.Expr)
 }
@@ -1147,7 +1141,7 @@ func (p *Printer) printExprInstanceOf(n node.Node) {
 	nn := n.(*expr.InstanceOf)
 
 	p.Print(nn.Expr)
-	io.WriteString(p.w, " "+ dictionary.FindWord("instanceof") + " ")
+	io.WriteString(p.w, " "+dictionary.FindWord("instanceof")+" ")
 
 	p.Print(nn.Class)
 }
@@ -1155,7 +1149,7 @@ func (p *Printer) printExprInstanceOf(n node.Node) {
 func (p *Printer) printExprIsset(n node.Node) {
 	nn := n.(*expr.Isset)
 
-	io.WriteString(p.w, dictionary.FindWord("isset") + "(")
+	io.WriteString(p.w, dictionary.FindWord("isset")+"(")
 
 	p.joinPrint(", ", nn.Variables)
 	io.WriteString(p.w, ")")
@@ -1164,7 +1158,7 @@ func (p *Printer) printExprIsset(n node.Node) {
 func (p *Printer) printExprList(n node.Node) {
 	nn := n.(*expr.List)
 
-	io.WriteString(p.w, dictionary.FindWord("list") + "(")
+	io.WriteString(p.w, dictionary.FindWord("list")+"(")
 
 	p.joinPrint(", ", nn.Items)
 	io.WriteString(p.w, ")")
@@ -1184,7 +1178,7 @@ func (p *Printer) printExprMethodCall(n node.Node) {
 func (p *Printer) printExprNew(n node.Node) {
 	nn := n.(*expr.New)
 
-	io.WriteString(p.w, dictionary.FindWord("new") + " ")
+	io.WriteString(p.w, dictionary.FindWord("new")+" ")
 
 	p.Print(nn.Class)
 
@@ -1226,7 +1220,7 @@ func (p *Printer) printExprPreInc(n node.Node) {
 func (p *Printer) printExprPrint(n node.Node) {
 	nn := n.(*expr.Print)
 
-	io.WriteString(p.w, dictionary.FindWord("print") + "(")
+	io.WriteString(p.w, dictionary.FindWord("print")+"(")
 
 	p.Print(nn.Expr)
 	io.WriteString(p.w, ")")
@@ -1250,7 +1244,7 @@ func (p *Printer) printExprReference(n node.Node) {
 func (p *Printer) printExprRequire(n node.Node) {
 	nn := n.(*expr.Require)
 
-	io.WriteString(p.w, dictionary.FindWord("require") + " ")
+	io.WriteString(p.w, dictionary.FindWord("require")+" ")
 
 	p.Print(nn.Expr)
 }
@@ -1258,7 +1252,7 @@ func (p *Printer) printExprRequire(n node.Node) {
 func (p *Printer) printExprRequireOnce(n node.Node) {
 	nn := n.(*expr.RequireOnce)
 
-	io.WriteString(p.w, dictionary.FindWord("require_once") +" ")
+	io.WriteString(p.w, dictionary.FindWord("require_once")+" ")
 
 	p.Print(nn.Expr)
 }
@@ -1266,7 +1260,7 @@ func (p *Printer) printExprRequireOnce(n node.Node) {
 func (p *Printer) printExprShellExec(n node.Node) {
 	nn := n.(*expr.ShellExec)
 
-	io.WriteString(p.w, "`")  //BACKTICK
+	io.WriteString(p.w, "`") //BACKTICK
 
 	for _, part := range nn.Parts {
 		switch part.(type) {
@@ -1361,7 +1355,7 @@ func (p *Printer) printExprYieldFrom(n node.Node) {
 func (p *Printer) printExprYield(n node.Node) {
 	nn := n.(*expr.Yield)
 
-	io.WriteString(p.w, dictionary.FindWord("yield") + " ")
+	io.WriteString(p.w, dictionary.FindWord("yield")+" ")
 
 	if nn.Key != nil {
 		p.Print(nn.Key)
@@ -1376,7 +1370,7 @@ func (p *Printer) printExprYield(n node.Node) {
 func (p *Printer) printStmtAltElseIf(n node.Node) {
 	nn := n.(*stmt.AltElseIf)
 
-	io.WriteString(p.w, dictionary.FindWord("elseif") + " (")
+	io.WriteString(p.w, dictionary.FindWord("elseif")+" (")
 
 	p.Print(nn.Cond)
 	io.WriteString(p.w, ") :")
@@ -1390,7 +1384,7 @@ func (p *Printer) printStmtAltElseIf(n node.Node) {
 func (p *Printer) printStmtAltElse(n node.Node) {
 	nn := n.(*stmt.AltElse)
 
-	io.WriteString(p.w, dictionary.FindWord("else") + " :")
+	io.WriteString(p.w, dictionary.FindWord("else")+" :")
 
 	if s := nn.Stmt.(*stmt.StmtList).Stmts; len(s) > 0 {
 		io.WriteString(p.w, "\n")
@@ -1414,7 +1408,7 @@ func (p *Printer) printStmtAltFor(n node.Node) {
 	io.WriteString(p.w, "\n")
 	p.printIndent()
 
-	io.WriteString(p.w, dictionary.FindWord("endfor") + ";")
+	io.WriteString(p.w, dictionary.FindWord("endfor")+";")
 }
 
 func (p *Printer) printStmtAltForeach(n node.Node) {
@@ -1445,7 +1439,7 @@ func (p *Printer) printStmtAltForeach(n node.Node) {
 func (p *Printer) printStmtAltIf(n node.Node) {
 	nn := n.(*stmt.AltIf)
 
-	io.WriteString(p.w, dictionary.FindWord("if") + " (")
+	io.WriteString(p.w, dictionary.FindWord("if")+" (")
 
 	p.Print(nn.Cond)
 	io.WriteString(p.w, ") :\n")
@@ -1467,14 +1461,14 @@ func (p *Printer) printStmtAltIf(n node.Node) {
 
 	io.WriteString(p.w, "\n")
 	p.printIndent()
-	io.WriteString(p.w, dictionary.FindWord("endif") + ";")
+	io.WriteString(p.w, dictionary.FindWord("endif")+";")
 
 }
 
 func (p *Printer) printStmtAltSwitch(n node.Node) {
 	nn := n.(*stmt.AltSwitch)
 
-	io.WriteString(p.w, dictionary.FindWord("switch") + " (")
+	io.WriteString(p.w, dictionary.FindWord("switch")+" (")
 
 	p.Print(nn.Cond)
 	io.WriteString(p.w, ") :\n")
@@ -1484,14 +1478,14 @@ func (p *Printer) printStmtAltSwitch(n node.Node) {
 
 	io.WriteString(p.w, "\n")
 	p.printIndent()
-	io.WriteString(p.w, dictionary.FindWord("endswitch") + ";")
+	io.WriteString(p.w, dictionary.FindWord("endswitch")+";")
 
 }
 
 func (p *Printer) printStmtAltWhile(n node.Node) {
 	nn := n.(*stmt.AltWhile)
 
-	io.WriteString(p.w, dictionary.FindWord("while") + " (")
+	io.WriteString(p.w, dictionary.FindWord("while")+" (")
 
 	p.Print(nn.Cond)
 	io.WriteString(p.w, ") :\n")
@@ -1501,7 +1495,7 @@ func (p *Printer) printStmtAltWhile(n node.Node) {
 
 	io.WriteString(p.w, "\n")
 	p.printIndent()
-	io.WriteString(p.w, dictionary.FindWord("endwhile") + ";")
+	io.WriteString(p.w, dictionary.FindWord("endwhile")+";")
 
 }
 
@@ -1521,7 +1515,7 @@ func (p *Printer) printStmtBreak(n node.Node) {
 func (p *Printer) printStmtCase(n node.Node) {
 	nn := n.(*stmt.Case)
 
-	io.WriteString(p.w, dictionary.FindWord("case") + " ")
+	io.WriteString(p.w, dictionary.FindWord("case")+" ")
 
 	p.Print(nn.Cond)
 	io.WriteString(p.w, ":")
@@ -1535,7 +1529,7 @@ func (p *Printer) printStmtCase(n node.Node) {
 func (p *Printer) printStmtCatch(n node.Node) {
 	nn := n.(*stmt.Catch)
 
-	io.WriteString(p.w, dictionary.FindWord("catch") + " (")
+	io.WriteString(p.w, dictionary.FindWord("catch")+" (")
 
 	p.joinPrint(" | ", nn.Types)
 	io.WriteString(p.w, " ")
@@ -1554,7 +1548,7 @@ func (p *Printer) printStmtClassMethod(n node.Node) {
 		p.joinPrint(" ", nn.Modifiers)
 		io.WriteString(p.w, " ")
 	}
-	io.WriteString(p.w, dictionary.FindWord("function") + " ")
+	io.WriteString(p.w, dictionary.FindWord("function")+" ")
 
 	if nn.ReturnsRef {
 		io.WriteString(p.w, "&")
@@ -1605,7 +1599,7 @@ func (p *Printer) printStmtClass(n node.Node) {
 	}
 
 	if nn.Extends != nil {
-		io.WriteString(p.w, " " + dictionary.FindWord("extends") + " ")
+		io.WriteString(p.w, " "+dictionary.FindWord("extends")+" ")
 
 		p.Print(nn.Extends.ClassName)
 	}
@@ -1685,7 +1679,7 @@ func (p *Printer) printStmtDeclare(n node.Node) {
 
 func (p *Printer) printStmtDefault(n node.Node) {
 	nn := n.(*stmt.Default)
-	io.WriteString(p.w, dictionary.FindWord("default") + ":")
+	io.WriteString(p.w, dictionary.FindWord("default")+":")
 
 	if len(nn.Stmts) > 0 {
 		io.WriteString(p.w, "\n")
@@ -1719,7 +1713,7 @@ func (p *Printer) printStmtDo(n node.Node) {
 
 func (p *Printer) printStmtEcho(n node.Node) {
 	nn := n.(*stmt.Echo)
-	io.WriteString(p.w, dictionary.FindWord("echo") + " ")
+	io.WriteString(p.w, dictionary.FindWord("echo")+" ")
 
 	p.joinPrint(", ", nn.Exprs)
 	io.WriteString(p.w, ";")
@@ -1754,7 +1748,6 @@ func (p *Printer) printStmtElse(n node.Node) {
 
 	io.WriteString(p.w, dictionary.FindWord("else"))
 
-
 	switch s := nn.Stmt.(type) {
 	case *stmt.Nop:
 		p.Print(s)
@@ -1782,7 +1775,7 @@ func (p *Printer) printStmtExpression(n node.Node) {
 func (p *Printer) printStmtFinally(n node.Node) {
 	nn := n.(*stmt.Finally)
 
-	io.WriteString(p.w, dictionary.FindWord("finally") + " {\n")
+	io.WriteString(p.w, dictionary.FindWord("finally")+" {\n")
 
 	p.printNodes(nn.Stmts)
 	io.WriteString(p.w, "\n")
@@ -1793,7 +1786,7 @@ func (p *Printer) printStmtFinally(n node.Node) {
 func (p *Printer) printStmtFor(n node.Node) {
 	nn := n.(*stmt.For)
 
-	io.WriteString(p.w, dictionary.FindWord("for") + " (")
+	io.WriteString(p.w, dictionary.FindWord("for")+" (")
 
 	p.joinPrint(", ", nn.Init)
 	io.WriteString(p.w, "; ")
@@ -1853,7 +1846,7 @@ func (p *Printer) printStmtForeach(n node.Node) {
 func (p *Printer) printStmtFunction(n node.Node) {
 	nn := n.(*stmt.Function)
 
-	io.WriteString(p.w, dictionary.FindWord("function") + " ")
+	io.WriteString(p.w, dictionary.FindWord("function")+" ")
 
 	if nn.ReturnsRef {
 		io.WriteString(p.w, "&")
@@ -1889,7 +1882,7 @@ func (p *Printer) printStmtGlobal(n node.Node) {
 func (p *Printer) printStmtGoto(n node.Node) {
 	nn := n.(*stmt.Goto)
 
-	io.WriteString(p.w, dictionary.FindWord("goto") + " ")
+	io.WriteString(p.w, dictionary.FindWord("goto")+" ")
 
 	p.Print(nn.Label)
 	io.WriteString(p.w, ";")
@@ -1898,7 +1891,7 @@ func (p *Printer) printStmtGoto(n node.Node) {
 func (p *Printer) printStmtGroupUse(n node.Node) {
 	nn := n.(*stmt.GroupUse)
 
-	io.WriteString(p.w, dictionary.FindWord("use") + " ")
+	io.WriteString(p.w, dictionary.FindWord("use")+" ")
 
 	if nn.UseType != nil {
 		p.Print(nn.UseType)
@@ -1912,7 +1905,7 @@ func (p *Printer) printStmtGroupUse(n node.Node) {
 }
 
 func (p *Printer) printStmtHaltCompiler(n node.Node) {
-	io.WriteString(p.w, dictionary.FindWord("__halt_compiler()") + ";")
+	io.WriteString(p.w, dictionary.FindWord("__halt_compiler()")+";")
 }
 
 func (p *Printer) printStmtIf(n node.Node) {
@@ -1970,7 +1963,7 @@ func (p *Printer) printStmtInterface(n node.Node) {
 	}
 
 	if nn.Extends != nil {
-		io.WriteString(p.w, " " + dictionary.FindWord("extends") + " ")
+		io.WriteString(p.w, " "+dictionary.FindWord("extends")+" ")
 
 		p.joinPrint(", ", nn.Extends.InterfaceNames)
 	}
@@ -2039,7 +2032,7 @@ func (p *Printer) printStmtProperty(n node.Node) {
 func (p *Printer) printStmtReturn(n node.Node) {
 	nn := n.(*stmt.Return)
 
-	io.WriteString(p.w, dictionary.FindWord("return") + " ")
+	io.WriteString(p.w, dictionary.FindWord("return")+" ")
 
 	p.Print(nn.Expr)
 	io.WriteString(p.w, ";")
@@ -2058,7 +2051,7 @@ func (p *Printer) printStmtStaticVar(n node.Node) {
 func (p *Printer) printStmtStatic(n node.Node) {
 	nn := n.(*stmt.Static)
 
-	io.WriteString(p.w, dictionary.FindWord("static") + " ")
+	io.WriteString(p.w, dictionary.FindWord("static")+" ")
 
 	p.joinPrint(", ", nn.Vars)
 	io.WriteString(p.w, ";")
@@ -2077,7 +2070,7 @@ func (p *Printer) printStmtStmtList(n node.Node) {
 func (p *Printer) printStmtSwitch(n node.Node) {
 	nn := n.(*stmt.Switch)
 
-	io.WriteString(p.w, dictionary.FindWord("switch") + " (")
+	io.WriteString(p.w, dictionary.FindWord("switch")+" (")
 
 	p.Print(nn.Cond)
 	io.WriteString(p.w, ")")
@@ -2092,7 +2085,7 @@ func (p *Printer) printStmtSwitch(n node.Node) {
 func (p *Printer) printStmtThrow(n node.Node) {
 	nn := n.(*stmt.Throw)
 
-	io.WriteString(p.w, dictionary.FindWord("throw") + " ")
+	io.WriteString(p.w, dictionary.FindWord("throw")+" ")
 
 	p.Print(nn.Expr)
 	io.WriteString(p.w, ";")
@@ -2110,8 +2103,7 @@ func (p *Printer) printStmtTraitUseAlias(n node.Node) {
 	nn := n.(*stmt.TraitUseAlias)
 
 	p.Print(nn.Ref)
-	io.WriteString(p.w, " " + dictionary.FindWord("as"))
-
+	io.WriteString(p.w, " "+dictionary.FindWord("as"))
 
 	if nn.Modifier != nil {
 		io.WriteString(p.w, " ")
@@ -2130,7 +2122,7 @@ func (p *Printer) printStmtTraitUsePrecedence(n node.Node) {
 	nn := n.(*stmt.TraitUsePrecedence)
 
 	p.Print(nn.Ref)
-	io.WriteString(p.w, " "+ dictionary.FindWord("insteadof") + " ")
+	io.WriteString(p.w, " "+dictionary.FindWord("insteadof")+" ")
 
 	p.joinPrint(", ", nn.Insteadof)
 
@@ -2140,7 +2132,7 @@ func (p *Printer) printStmtTraitUsePrecedence(n node.Node) {
 func (p *Printer) printStmtTraitUse(n node.Node) {
 	nn := n.(*stmt.TraitUse)
 
-	io.WriteString(p.w, dictionary.FindWord("use") + " ")
+	io.WriteString(p.w, dictionary.FindWord("use")+" ")
 
 	p.joinPrint(", ", nn.Traits)
 
@@ -2159,7 +2151,7 @@ func (p *Printer) printStmtTraitUse(n node.Node) {
 func (p *Printer) printStmtTrait(n node.Node) {
 	nn := n.(*stmt.Trait)
 
-	io.WriteString(p.w, dictionary.FindWord("trait") + " ")
+	io.WriteString(p.w, dictionary.FindWord("trait")+" ")
 
 	p.Print(nn.TraitName)
 
@@ -2175,7 +2167,7 @@ func (p *Printer) printStmtTrait(n node.Node) {
 func (p *Printer) printStmtTry(n node.Node) {
 	nn := n.(*stmt.Try)
 
-	io.WriteString(p.w, dictionary.FindWord("try") + " {\n")
+	io.WriteString(p.w, dictionary.FindWord("try")+" {\n")
 
 	p.printNodes(nn.Stmts)
 	io.WriteString(p.w, "\n")
@@ -2199,7 +2191,7 @@ func (p *Printer) printStmtTry(n node.Node) {
 func (p *Printer) printStmtUnset(n node.Node) {
 	nn := n.(*stmt.Unset)
 
-	io.WriteString(p.w, dictionary.FindWord("unset") + "(")
+	io.WriteString(p.w, dictionary.FindWord("unset")+"(")
 
 	p.joinPrint(", ", nn.Vars)
 	io.WriteString(p.w, ");")
@@ -2208,8 +2200,7 @@ func (p *Printer) printStmtUnset(n node.Node) {
 func (p *Printer) printStmtUseList(n node.Node) {
 	nn := n.(*stmt.UseList)
 
-	io.WriteString(p.w, dictionary.FindWord("use") + " ")
-
+	io.WriteString(p.w, dictionary.FindWord("use")+" ")
 
 	if nn.UseType != nil {
 		p.Print(nn.UseType)
@@ -2231,7 +2222,7 @@ func (p *Printer) printStmtUse(n node.Node) {
 	p.Print(nn.Use)
 
 	if nn.Alias != nil {
-		io.WriteString(p.w, " "+ dictionary.FindWord("as") +" ")
+		io.WriteString(p.w, " "+dictionary.FindWord("as")+" ")
 
 		p.Print(nn.Alias)
 	}
@@ -2240,7 +2231,7 @@ func (p *Printer) printStmtUse(n node.Node) {
 func (p *Printer) printStmtWhile(n node.Node) {
 	nn := n.(*stmt.While)
 
-	io.WriteString(p.w, dictionary.FindWord("while") + " (")
+	io.WriteString(p.w, dictionary.FindWord("while")+" (")
 
 	p.Print(nn.Cond)
 	io.WriteString(p.w, ")")

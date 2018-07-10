@@ -3,7 +3,6 @@ package assign
 import (
 	"github.com/truestblue/php-transformer/node"
 	"github.com/truestblue/php-transformer/walker"
-
 )
 
 // Mul node

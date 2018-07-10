@@ -18,7 +18,6 @@ import (
 	"github.com/truestblue/php-transformer/node/scalar"
 	"github.com/truestblue/php-transformer/node/stmt"
 	"github.com/truestblue/php-transformer/scanner"
-
 )
 
 //line php5/php5.y:22
@@ -348,10 +347,6 @@ const yyErrCode = 2
 const yyInitialStackSize = 16
 
 //line php5/php5.y:6792
-<<<<<<< HEAD
-=======
-
->>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
 type simpleIndirectReference struct {
 	all  []*expr.Variable
 	last *expr.Variable

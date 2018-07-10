@@ -54,4 +54,3 @@ Package usage example:
 	}
 */
 package main // import "github.com/truestblue/php-transformer"
-

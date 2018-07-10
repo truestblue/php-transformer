@@ -6,17 +6,16 @@ import (
 	"testing"
 
 	"github.com/kylelemons/godebug/pretty"
+	"github.com/z7zmey/php-parser/node/expr"
+	"github.com/z7zmey/php-parser/node/expr/assign"
+	"github.com/z7zmey/php-parser/node/expr/binary"
+	"github.com/z7zmey/php-parser/node/expr/cast"
+	"github.com/z7zmey/php-parser/node/name"
+	"github.com/z7zmey/php-parser/node/scalar"
+	"github.com/z7zmey/php-parser/php5"
 
-	"github.com/truestblue/php-transformer/node/expr"
-	"github.com/truestblue/php-transformer/node/expr/assign"
-	"github.com/truestblue/php-transformer/node/expr/binary"
-	"github.com/truestblue/php-transformer/node/expr/cast"
-	"github.com/truestblue/php-transformer/node/name"
-	"github.com/truestblue/php-transformer/node/scalar"
-	"github.com/truestblue/php-transformer/php5"
-
-	"github.com/truestblue/php-transformer/node"
-	"github.com/truestblue/php-transformer/node/stmt"
+	"github.com/z7zmey/php-parser/node"
+	"github.com/z7zmey/php-parser/node/stmt"
 )
 
 func assertEqual(t *testing.T, expected interface{}, actual interface{}) {

@@ -1,23 +1,13 @@
-<<<<<<< HEAD
-package scalar
-=======
 package scalar_test
->>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
 
 import (
 	"reflect"
 	"testing"
 
 	"github.com/kylelemons/godebug/pretty"
-<<<<<<< HEAD
 	"github.com/truestblue/php-transformer/node"
 	"github.com/truestblue/php-transformer/node/scalar"
 	"github.com/truestblue/php-transformer/walker"
-=======
-	"github.com/z7zmey/php-parser/node"
-	"github.com/z7zmey/php-parser/node/scalar"
-	"github.com/z7zmey/php-parser/walker"
->>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
 )
 
 var nameNodesTests = []struct {

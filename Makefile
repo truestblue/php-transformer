@@ -9,7 +9,7 @@ build:
 	go build
 
 run:
-	./php-parser $(PHPFILE)
+	./php-transformer $(PHPFILE)
 
 test:
 	go test ./...

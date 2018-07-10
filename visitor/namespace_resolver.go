@@ -11,7 +11,6 @@ import (
 	"github.com/truestblue/php-transformer/node/name"
 	"github.com/truestblue/php-transformer/node/stmt"
 	"github.com/truestblue/php-transformer/walker"
-
 )
 
 // NamespaceResolver visitor

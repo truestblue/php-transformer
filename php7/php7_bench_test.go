@@ -4,11 +4,7 @@ import (
 	"bytes"
 	"testing"
 
-<<<<<<< HEAD
 	"github.com/truestblue/php-transformer/php7"
-=======
-	"github.com/z7zmey/php-parser/php7"
->>>>>>> 6d554c0468596ce633490e01f7d7cb179c7dabab
 )
 
 func BenchmarkPhp7(b *testing.B) {

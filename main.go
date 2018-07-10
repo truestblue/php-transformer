@@ -8,15 +8,15 @@ import (
 	"path/filepath"
 	"sync"
 
-	"github.com/yookoala/realpath"
+	"github.com/truestblue/php-transformer/dictionary"
 	"github.com/truestblue/php-transformer/parser"
 	"github.com/truestblue/php-transformer/php5"
 	"github.com/truestblue/php-transformer/php7"
 	printer2 "github.com/truestblue/php-transformer/printer"
 	"github.com/truestblue/php-transformer/visitor"
+	"github.com/yookoala/realpath"
 	"io"
 	"strings"
-	"github.com/truestblue/php-transformer/dictionary"
 )
 
 const (
@@ -190,4 +190,3 @@ func copyFile(src, dst string) error {
 	}
 	return out.Close()
 }
-
