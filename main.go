@@ -17,6 +17,7 @@ import (
 	"github.com/yookoala/realpath"
 	"io"
 	"strings"
+	"errors"
 )
 
 const (
@@ -28,6 +29,7 @@ const (
 var wg sync.WaitGroup
 var usePhp5 *bool
 var dump *bool
+var replace *bool
 
 var base = ""
 var outFilePath = ""
@@ -35,6 +37,8 @@ var outFilePath = ""
 func main() {
 	usePhp5 = flag.Bool("php5", false, "use PHP5 parserWorker")
 	dump = flag.Bool("dump", false, "disable dumping to stdout")
+	replace = flag.Bool("replace", false, "replace files in place")
+
 	flag.Parse()
 
 	pathCh := make(chan string)
@@ -64,15 +68,10 @@ func processPath(pathList []string, pathCh chan<- string) {
 		real, err := realpath.Realpath(pathCur)
 		checkErr(err)
 
-		fmt.Println(real)
-
-		base = real + "/"
-		outFilePath = pathCur + "-ps"
-		os.MkdirAll(outFilePath, os.ModePerm)
+		parseFileOut(real)
 
 		err = filepath.Walk(real, func(pathCur string, f os.FileInfo, err error) error {
-			if !f.IsDir() && filepath.Ext(pathCur) == ".php" { //TODO: .php is not the only acceptable file extension.
-				wg.Add(1)
+			if !f.IsDir() && (filepath.Ext(pathCur) == ".php" || filepath.Ext(pathCur) == ".phpt"){
 				pathCh <- pathCur
 			} else if f.IsDir() {
 				printOut(pathCur, DIR)
@@ -121,17 +120,17 @@ func printer(result <-chan parser.Parser) {
 		}
 
 		if *dump {
-		nsResolver := visitor.NewNamespaceResolver()
-		parserWorker.GetRootNode().Walk(nsResolver)
+			nsResolver := visitor.NewNamespaceResolver()
+			parserWorker.GetRootNode().Walk(nsResolver)
 
-		dumper := visitor.Dumper{
-			Writer:     os.Stdout,
-			Indent:     "  | ",
-			Comments:   parserWorker.GetComments(),
-			Positions:  parserWorker.GetPositions(),
-			NsResolver: nsResolver,
-		}
-		parserWorker.GetRootNode().Walk(dumper)
+			dumper := visitor.Dumper{
+				Writer:     os.Stdout,
+				Indent:     "  | ",
+				Comments:   parserWorker.GetComments(),
+				Positions:  parserWorker.GetPositions(),
+				NsResolver: nsResolver,
+			}
+			parserWorker.GetRootNode().Walk(dumper)
 		}
 
 		fileOut := printOut(parserWorker.GetPath(), SCR)
@@ -189,4 +188,29 @@ func copyFile(src, dst string) error {
 		return err
 	}
 	return out.Close()
+}
+
+func parseFileOut(real string) {
+
+	f, err := os.Lstat(real)
+	checkErr(err)
+
+	if !f.IsDir() {
+		err := errors.New("Error-- filenames not accepted, please enter path")
+		checkErr(err)
+	}
+
+	if *replace {
+		base = real
+		outFilePath = real
+		return
+	}
+	fmt.Println(real)
+
+	real = strings.TrimRight(real, "/")
+
+	base = real + "/"
+
+	outFilePath = real + "-ps"
+	os.MkdirAll(outFilePath, os.ModePerm)
 }
