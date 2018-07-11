@@ -39,7 +39,7 @@ func main() {
 	usePhp5 = flag.Bool("php5", false, "use PHP5 parserWorker")
 	dump = flag.Bool("dump", false, "disable dumping to stdout")
 	replace = flag.Bool("replace", false, "replace files in place")
-	replace = flag.Bool("test", false, "transform .phpt files")
+	test = flag.Bool("test", false, "transform .phpt files")
 
 
 	flag.Parse()
