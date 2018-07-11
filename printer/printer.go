@@ -1341,13 +1341,17 @@ func (p *Printer) printExprUnaryPlus(n node.Node) {
 }
 
 func (p *Printer) printExprVariable(n node.Node) {
+
 	io.WriteString(p.w, "$")
 	nn := n.(*expr.Variable).VarName
 
-	s := nn.(*node.Identifier).Value
-	io.WriteString(p.w, s)
-
-	//p.Print(n.(*expr.Variable).VarName)
+	switch nn.(type) {
+	case *node.Identifier:
+		s := nn.(*node.Identifier).Value
+		io.WriteString(p.w, s)
+	default:
+		p.Print(n.(*expr.Variable).VarName)
+	}
 }
 
 func (p *Printer) printExprYieldFrom(n node.Node) {
@@ -1910,7 +1914,7 @@ func (p *Printer) printStmtGroupUse(n node.Node) {
 }
 
 func (p *Printer) printStmtHaltCompiler(n node.Node) {
-	io.WriteString(p.w, dictionary.FindWord("__halt_compiler()")+";")
+	io.WriteString(p.w, dictionary.FindWord("__halt_compiler")+"();")
 }
 
 func (p *Printer) printStmtIf(n node.Node) {

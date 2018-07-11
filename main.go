@@ -30,6 +30,7 @@ var wg sync.WaitGroup
 var usePhp5 *bool
 var dump *bool
 var replace *bool
+var test *bool
 
 var base = ""
 var outFilePath = ""
@@ -38,6 +39,8 @@ func main() {
 	usePhp5 = flag.Bool("php5", false, "use PHP5 parserWorker")
 	dump = flag.Bool("dump", false, "disable dumping to stdout")
 	replace = flag.Bool("replace", false, "replace files in place")
+	replace = flag.Bool("test", false, "transform .phpt files")
+
 
 	flag.Parse()
 
@@ -47,7 +50,7 @@ func main() {
 	dictionary.InitMapping()
 
 	// run 4 concurrent parserWorkers
-	for i := 0; i < 4; i++ {
+	for i := 0; i < 1; i++ {
 		go parserWorker(pathCh, resultCh)
 	}
 
@@ -71,7 +74,8 @@ func processPath(pathList []string, pathCh chan<- string) {
 		parseFileOut(real)
 
 		err = filepath.Walk(real, func(pathCur string, f os.FileInfo, err error) error {
-			if !f.IsDir() && (filepath.Ext(pathCur) == ".php" || filepath.Ext(pathCur) == ".phpt"){
+			if !f.IsDir() && (filepath.Ext(pathCur) == ".php" || (*test && filepath.Ext(pathCur) == ".phpt")) {
+				wg.Add(1)
 				pathCh <- pathCur
 			} else if f.IsDir() {
 				printOut(pathCur, DIR)
@@ -152,8 +156,12 @@ func checkErr(err error) {
 
 func printOut(pathCur string, printType int) string {
 	sf := strings.SplitAfter(pathCur, base)
-	sf[0] = outFilePath
-	fileOut := strings.Join(sf, "/")
+
+	if !*replace {
+		sf[0] = outFilePath
+	}
+		fileOut := strings.Join(sf, "/")
+
 
 	switch printType {
 	case DIR:
@@ -200,17 +208,14 @@ func parseFileOut(real string) {
 		checkErr(err)
 	}
 
-	if *replace {
-		base = real
-		outFilePath = real
-		return
-	}
+
 	fmt.Println(real)
 
 	real = strings.TrimRight(real, "/")
 
 	base = real + "/"
-
-	outFilePath = real + "-ps"
-	os.MkdirAll(outFilePath, os.ModePerm)
+	if !*replace {
+		outFilePath = real + "-ps"
+		os.MkdirAll(outFilePath, os.ModePerm)
+	}
 }
