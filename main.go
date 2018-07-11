@@ -50,7 +50,7 @@ func main() {
 	dictionary.InitMapping()
 
 	// run 4 concurrent parserWorkers
-	for i := 0; i < 1; i++ {
+	for i := 0; i < 4; i++ {
 		go parserWorker(pathCh, resultCh)
 	}
 
