@@ -167,7 +167,9 @@ func printOut(pathCur string, printType int) string {
 	case DIR:
 		os.MkdirAll(fileOut, os.ModePerm)
 	case CPY:
-		copyFile(pathCur, fileOut)
+		if !*replace {
+			copyFile(pathCur, fileOut)
+		}
 	case SCR:
 		//just pass back file name.
 	default:
