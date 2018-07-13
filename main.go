@@ -17,7 +17,6 @@ import (
 	"github.com/yookoala/realpath"
 	"io"
 	"strings"
-	"errors"
 )
 
 const (
@@ -40,7 +39,6 @@ func main() {
 	dump = flag.Bool("dump", false, "disable dumping to stdout")
 	replace = flag.Bool("replace", false, "replace files in place")
 	test = flag.Bool("test", false, "transform .phpt files")
-
 
 	flag.Parse()
 
@@ -67,11 +65,13 @@ func main() {
 }
 
 func processPath(pathList []string, pathCh chan<- string) {
+
+
 	for _, pathCur := range pathList {
 		real, err := realpath.Realpath(pathCur)
 		checkErr(err)
 
-		parseFileOut(real)
+		parsePathOut(real)
 
 		err = filepath.Walk(real, func(pathCur string, f os.FileInfo, err error) error {
 			if !f.IsDir() && (filepath.Ext(pathCur) == ".php" || (*test && filepath.Ext(pathCur) == ".phpt")) {
@@ -200,15 +200,9 @@ func copyFile(src, dst string) error {
 	return out.Close()
 }
 
-func parseFileOut(real string) {
+func parsePathOut(real string) {
 
-	f, err := os.Lstat(real)
-	checkErr(err)
 
-	if !f.IsDir() {
-		err := errors.New("Error-- filenames not accepted, please enter path")
-		checkErr(err)
-	}
 
 
 	fmt.Println(real)
