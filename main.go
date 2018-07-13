@@ -31,6 +31,8 @@ var usePhp5 *bool
 var dump *bool
 var replace *bool
 var test *bool
+var phar *bool
+
 
 var base = ""
 var outFilePath = ""
@@ -40,6 +42,8 @@ func main() {
 	dump = flag.Bool("dump", false, "disable dumping to stdout")
 	replace = flag.Bool("replace", false, "replace files in place")
 	test = flag.Bool("test", false, "transform .phpt files")
+	phar = flag.Bool("phar", false, "transform .inc")
+
 
 	flag.Parse()
 
@@ -76,7 +80,8 @@ func processPath(pathList []string, pathCh chan<- string) {
 
 		err = filepath.Walk(real, func(pathCur string, f os.FileInfo, err error) error {
 			if !f.IsDir() && (filepath.Ext(pathCur) == ".php" ||
-				(*test && (filepath.Ext(pathCur) == ".phpt" || filepath.Ext(pathCur) == ".inc"))) {
+					(*test && filepath.Ext(pathCur) == ".phpt") ||
+					(*phar && (filepath.Ext(pathCur) == ".inc" || filepath.Ext(pathCur) == ".phar"))) {
 				wg.Add(1)
 				pathCh <- pathCur
 			} else if f.IsDir() {
