@@ -17,6 +17,7 @@ import (
 	"github.com/yookoala/realpath"
 	"io"
 	"strings"
+	"errors"
 )
 
 const (
@@ -202,10 +203,13 @@ func copyFile(src, dst string) error {
 
 func parsePathOut(real string) {
 
+	f, err := os.Lstat(real)
+	checkErr(err)
 
-
-
-	fmt.Println(real)
+	if !f.IsDir() {
+		err := errors.New("Error-- filenames not accepted, please enter path")
+		checkErr(err)
+	}
 
 	real = strings.TrimRight(real, "/")
 
