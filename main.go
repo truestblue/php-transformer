@@ -81,7 +81,7 @@ func processPath(pathList []string, pathCh chan<- string) {
 		err = filepath.Walk(real, func(pathCur string, f os.FileInfo, err error) error {
 			if !f.IsDir() && (filepath.Ext(pathCur) == ".php" ||
 					(*test && filepath.Ext(pathCur) == ".phpt") ||
-					(*phar && (filepath.Ext(pathCur) == ".inc" || filepath.Ext(pathCur) == ".phar"))) {
+					(*phar && (filepath.Ext(pathCur) == ".inc"))) {
 				wg.Add(1)
 				pathCh <- pathCur
 			} else if f.IsDir() {
